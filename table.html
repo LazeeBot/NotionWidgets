@@ -1,55 +1,73 @@
-<table border="1">
-  <tr>
-    <th>Size in Inches</th>
-    <th>WIDTH</th>
-    <th>LENGTH</th>
-  </tr>
-  <tr>
-    <td>36</td>
-    <td>48</td>
-  </tr>
-</table>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Media Pricing Calculator</title>
+</head>
+<body>
+  <h1>Media Pricing Calculator</h1>
 
-<table border="1">
-  <tr>
-    <th>MEDIA</th>
-    <th>UNIT PRICE</th>
-  </tr>
-  <tr>
-    <td>Vinyl</td>
-    <td>$144.00</td>
-  </tr>
-  <tr>
-    <td>Poster</td>
-    <td>$108.00</td>
-  </tr>
-  <tr>
-    <td>Cloth</td>
-    <td>$60.00</td>
-  </tr>
-  <tr>
-    <td>Cut-out</td>
-    <td>$180.00</td>
-  </tr>
-  <tr>
-    <td>Outdoor Magnet</td>
-    <td>$312.00</td>
-  </tr>
-</table>
-
-<table border="1">
-  <tr>
-    <th>Additional Service (Sticker or Poster with Foamboard Backing)</th>
-    <th>UNIT PRICE</th>
-  </tr>
-  <tr>
-    <td>Foamboard</td>
-    <td>$96.00</td>
-  </tr>
-  <tr>
-    <td>Poster/Sticker</td>
-    <td>$144.00</td>
-  </tr>
-</table>
-
-<p><strong>Subtotal:</strong> $240.00</p>
+  <label for="width">Width (in inches):</label>
+  <input type="number" id="width" placeholder="Enter width" step="any">
+  
+  <label for="length">Length (in inches):</label>
+  <input type="number" id="length" placeholder="Enter length" step="any">
+  
+  <table border="1">
+    <tr>
+      <th>MEDIA</th>
+      <th>UNIT PRICE</th>
+      <th>TOTAL</th>
+    </tr>
+    <tr>
+      <td>Vinyl</td>
+      <td>$12</td>
+      <td id="vinylTotal">$0.00</td>
+    </tr>
+    <tr>
+      <td>Poster</td>
+      <td>$9</td>
+      <td id="posterTotal">$0.00</td>
+    </tr>
+    <tr>
+      <td>Cloth</td>
+      <td>$5</td>
+      <td id="clothTotal">$0.00</td>
+    </tr>
+    <tr>
+      <td>Cut-out</td>
+      <td>$15</td>
+      <td id="cutoutTotal">$0.00</td>
+    </tr>
+    <tr>
+      <td>Outdoor Magnet</td>
+      <td>$26</td>
+      <td id="magnetTotal">$0.00</td>
+    </tr>
+  </table>
+  
+  <script>
+    const widthInput = document.getElementById("width");
+    const lengthInput = document.getElementById("length");
+    
+    const updateTotals = () => {
+      const width = parseFloat(widthInput.value) || 0;
+      const length = parseFloat(lengthInput.value) || 0;
+      
+      const vinylTotal = (width * length / 144 * 12).toFixed(2);
+      const posterTotal = (width * length / 144 * 9).toFixed(2);
+      const clothTotal = (width * length / 144 * 5).toFixed(2);
+      const cutoutTotal = (width * length / 144 * 15).toFixed(2);
+      const magnetTotal = (width * length / 144 * 26).toFixed(2);
+      
+      document.getElementById("vinylTotal").textContent = `$${vinylTotal}`;
+      document.getElementById("posterTotal").textContent = `$${posterTotal}`;
+      document.getElementById("clothTotal").textContent = `$${clothTotal}`;
+      document.getElementById("cutoutTotal").textContent = `$${cutoutTotal}`;
+      document.getElementById("magnetTotal").textContent = `$${magnetTotal}`;
+    };
+    
+    widthInput.addEventListener("input", updateTotals);
+    lengthInput.addEventListener("input", updateTotals);
+  </script>
+</body>
+</html>
