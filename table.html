@@ -40,29 +40,49 @@
       <th class="total">TOTAL</th> <!-- Apply the "total" class to the "TOTAL" column -->
     </tr>
     <tr>
-      <td>Vinyl</td>
-      <td>$12</td>
-      <td id="vinylTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
+      <td>Engineering Odd Size</td>
+      <td>$0.75</td>
+      <td id="engineeringTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
     </tr>
     <tr>
-      <td>Poster</td>
-      <td>$9</td>
-      <td id="posterTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
-    </tr>
-    <tr>
-      <td>Cloth</td>
-      <td>$5</td>
+      <td>Cloth Banner</td>
+      <td>$5.00</td>
       <td id="clothTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
     </tr>
     <tr>
-      <td>Cut-out</td>
-      <td>$15</td>
-      <td id="cutoutTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
+      <td>Poster</td>
+      <td>$9.00</td>
+      <td id="posterTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
     </tr>
     <tr>
-      <td>Outdoor Magnet</td>
-      <td>$26</td>
-      <td id="magnetTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
+      <td>Vinyl Sticker</td>
+      <td>$12.00</td>
+      <td id="vinylStickerTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
+    </tr>
+    <tr>
+      <td>Vinyl Banner</td>
+      <td>$12.00</td>
+      <td id="vinylBannerTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
+    </tr>
+    <tr>
+      <td>Backlit</td>
+      <td>$12.00</td>
+      <td id="backlitTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
+    </tr>
+    <tr>
+      <td>Cut Out Vinyl Sticker</td>
+      <td>$15.00</td>
+      <td id="cutoutStickerTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
+    </tr>
+    <tr>
+      <td>One Way View</td>
+      <td>$20.00</td>
+      <td id="oneWayTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
+    </tr>
+    <tr>
+      <td>Outdoor Magnetic Sign</td>
+      <td>$25.55</td>
+      <td id="outdoorMagnetTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
     </tr>
     <tr>
       <td></td>
@@ -71,12 +91,12 @@
     </tr>
     <tr>
       <td>Foamboard</td>
-      <td>$8</td>
+      <td>$8.00</td>
       <td id="foamboardTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
     </tr>
     <tr>
       <td>Poster/Sticker</td>
-      <td>$12</td>
+      <td>$12.00</td>
       <td id="posterStickerTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
     </tr>
     <tr>
@@ -94,20 +114,28 @@
       const width = parseFloat(widthInput.value) || 0;
       const length = parseFloat(lengthInput.value) || 0;
       
-      const vinylTotal = (width * length / 144 * 12).toFixed(2);
-      const posterTotal = (width * length / 144 * 9).toFixed(2);
+      const engineeringTotal = (width * length / 144 * 0.75).toFixed(2);
       const clothTotal = (width * length / 144 * 5).toFixed(2);
-      const cutoutTotal = (width * length / 144 * 15).toFixed(2);
-      const magnetTotal = (width * length / 144 * 26).toFixed(2);
+      const posterTotal = (width * length / 144 * 9).toFixed(2);
+      const vinylStickerTotal = (width * length / 144 * 12).toFixed(2);
+      const vinylBannerTotal = (width * length / 144 * 12).toFixed(2);
+      const backlitTotal = (width * length / 144 * 12).toFixed(2);
+      const cutoutStickerTotal = (width * length / 144 * 15).toFixed(2);
+      const oneWayTotal = (width * length / 144 * 20).toFixed(2);
+      const outdoorMagnetTotal = (width * length / 144 * 25.55).toFixed(2);
       const foamboardTotal = (width * length / 144 * 8).toFixed(2);
       const posterStickerTotal = (width * length / 144 * 12).toFixed(2);
       const subtotalTotal = (parseFloat(foamboardTotal) + parseFloat(posterStickerTotal)).toFixed(2);
       
-      document.getElementById("vinylTotal").textContent = `$${vinylTotal}`;
-      document.getElementById("posterTotal").textContent = `$${posterTotal}`;
+      document.getElementById("engineeringTotal").textContent = `$${engineeringTotal}`;
       document.getElementById("clothTotal").textContent = `$${clothTotal}`;
-      document.getElementById("cutoutTotal").textContent = `$${cutoutTotal}`;
-      document.getElementById("magnetTotal").textContent = `$${magnetTotal}`;
+      document.getElementById("posterTotal").textContent = `$${posterTotal}`;
+      document.getElementById("vinylStickerTotal").textContent = `$${vinylStickerTotal}`;
+      document.getElementById("vinylBannerTotal").textContent = `$${vinylBannerTotal}`;
+      document.getElementById("backlitTotal").textContent = `$${backlitTotal}`;
+      document.getElementById("cutoutStickerTotal").textContent = `$${cutoutStickerTotal}`;
+      document.getElementById("oneWayTotal").textContent = `$${oneWayTotal}`;
+      document.getElementById("outdoorMagnetTotal").textContent = `$${outdoorMagnetTotal}`;
       document.getElementById("foamboardTotal").textContent = `$${foamboardTotal}`;
       document.getElementById("posterStickerTotal").textContent = `$${posterStickerTotal}`;
       document.getElementById("subtotalTotal").textContent = `$${subtotalTotal}`;
