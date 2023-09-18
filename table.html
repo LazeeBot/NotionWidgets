@@ -44,6 +44,11 @@
       <td id="magnetTotal">$0.00</td>
     </tr>
     <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
       <td>Foamboard</td>
       <td>$8</td>
       <td id="foamboardTotal">$0.00</td>
@@ -52,6 +57,11 @@
       <td>Poster/Sticker</td>
       <td>$12</td>
       <td id="posterStickerTotal">$0.00</td>
+    </tr>
+    <tr>
+      <td><strong>Subtotal (Foamboard & Poster/Sticker)</strong></td>
+      <td></td>
+      <td id="subtotalTotal">$0.00</td>
     </tr>
   </table>
   
@@ -70,6 +80,7 @@
       const magnetTotal = (width * length / 144 * 26).toFixed(2);
       const foamboardTotal = (width * length / 144 * 8).toFixed(2);
       const posterStickerTotal = (width * length / 144 * 12).toFixed(2);
+      const subtotalTotal = (parseFloat(foamboardTotal) + parseFloat(posterStickerTotal)).toFixed(2);
       
       document.getElementById("vinylTotal").textContent = `$${vinylTotal}`;
       document.getElementById("posterTotal").textContent = `$${posterTotal}`;
@@ -78,6 +89,7 @@
       document.getElementById("magnetTotal").textContent = `$${magnetTotal}`;
       document.getElementById("foamboardTotal").textContent = `$${foamboardTotal}`;
       document.getElementById("posterStickerTotal").textContent = `$${posterStickerTotal}`;
+      document.getElementById("subtotalTotal").textContent = `$${subtotalTotal}`;
     };
     
     widthInput.addEventListener("input", updateTotals);
