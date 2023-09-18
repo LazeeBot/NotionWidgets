@@ -43,6 +43,16 @@
       <td>$26</td>
       <td id="magnetTotal">$0.00</td>
     </tr>
+    <tr>
+      <td>Foamboard</td>
+      <td>$8</td>
+      <td id="foamboardTotal">$0.00</td>
+    </tr>
+    <tr>
+      <td>Poster/Sticker</td>
+      <td>$12</td>
+      <td id="posterStickerTotal">$0.00</td>
+    </tr>
   </table>
   
   <script>
@@ -58,12 +68,16 @@
       const clothTotal = (width * length / 144 * 5).toFixed(2);
       const cutoutTotal = (width * length / 144 * 15).toFixed(2);
       const magnetTotal = (width * length / 144 * 26).toFixed(2);
+      const foamboardTotal = (width * length / 144 * 8).toFixed(2);
+      const posterStickerTotal = (width * length / 144 * 12).toFixed(2);
       
       document.getElementById("vinylTotal").textContent = `$${vinylTotal}`;
       document.getElementById("posterTotal").textContent = `$${posterTotal}`;
       document.getElementById("clothTotal").textContent = `$${clothTotal}`;
       document.getElementById("cutoutTotal").textContent = `$${cutoutTotal}`;
       document.getElementById("magnetTotal").textContent = `$${magnetTotal}`;
+      document.getElementById("foamboardTotal").textContent = `$${foamboardTotal}`;
+      document.getElementById("posterStickerTotal").textContent = `$${posterStickerTotal}`;
     };
     
     widthInput.addEventListener("input", updateTotals);
