@@ -2,6 +2,27 @@
 <html>
 <head>
   <title>Media Pricing Calculator</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: center;
+    }
+    
+    th {
+      background-color: #f2f2f2; /* Highlight the header row */
+      font-weight: bold; /* Make the header text bold */
+    }
+    
+    td.total {
+      font-weight: bold; /* Make the "TOTAL" column text bold */
+    }
+  </style>
 </head>
 <body>
   <h1>Media Pricing Calculator</h1>
@@ -16,32 +37,32 @@
     <tr>
       <th>MEDIA</th>
       <th>UNIT PRICE</th>
-      <th>TOTAL</th>
+      <th class="total">TOTAL</th> <!-- Apply the "total" class to the "TOTAL" column -->
     </tr>
     <tr>
       <td>Vinyl</td>
       <td>$12</td>
-      <td id="vinylTotal">$0.00</td>
+      <td id="vinylTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
     </tr>
     <tr>
       <td>Poster</td>
       <td>$9</td>
-      <td id="posterTotal">$0.00</td>
+      <td id="posterTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
     </tr>
     <tr>
       <td>Cloth</td>
       <td>$5</td>
-      <td id="clothTotal">$0.00</td>
+      <td id="clothTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
     </tr>
     <tr>
       <td>Cut-out</td>
       <td>$15</td>
-      <td id="cutoutTotal">$0.00</td>
+      <td id="cutoutTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
     </tr>
     <tr>
       <td>Outdoor Magnet</td>
       <td>$26</td>
-      <td id="magnetTotal">$0.00</td>
+      <td id="magnetTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
     </tr>
     <tr>
       <td></td>
@@ -51,17 +72,17 @@
     <tr>
       <td>Foamboard</td>
       <td>$8</td>
-      <td id="foamboardTotal">$0.00</td>
+      <td id="foamboardTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
     </tr>
     <tr>
       <td>Poster/Sticker</td>
       <td>$12</td>
-      <td id="posterStickerTotal">$0.00</td>
+      <td id="posterStickerTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
     </tr>
     <tr>
       <td><strong>Subtotal (Foamboard & Poster/Sticker)</strong></td>
       <td></td>
-      <td id="subtotalTotal">$0.00</td>
+      <td id="subtotalTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
     </tr>
   </table>
   
