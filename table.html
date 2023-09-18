@@ -3,13 +3,35 @@
 <head>
   <title>Media Pricing Calculator</title>
   <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+    
+    h1 {
+      text-align: center;
+      padding: 20px;
+      background-color: #333;
+      color: white;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
     table {
       border-collapse: collapse;
       width: 100%;
     }
     
     th, td {
-      border: 1px solid black;
+      border: 1px solid #ddd;
       padding: 8px;
       text-align: center;
     }
@@ -22,89 +44,101 @@
     td.total {
       font-weight: bold; /* Make the "TOTAL" column text bold */
     }
+    
+    label {
+      font-weight: bold;
+    }
+    
+    input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
   <h1>Media Pricing Calculator</h1>
 
-  <label for="width">Width (in inches):</label>
-  <input type="number" id="width" placeholder="Enter width" step="any">
-  
-  <label for="length">Length (in inches):</label>
-  <input type="number" id="length" placeholder="Enter length" step="any">
-  
-  <table border="1">
-    <tr>
-      <th>MEDIA</th>
-      <th>UNIT PRICE</th>
-      <th class="total">TOTAL</th> <!-- Apply the "total" class to the "TOTAL" column -->
-    </tr>
-    <tr>
-      <td>Engineering Odd Size</td>
-      <td>$0.75</td>
-      <td id="engineeringTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
-    </tr>
-    <tr>
-      <td>Cloth Banner</td>
-      <td>$5.00</td>
-      <td id="clothTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
-    </tr>
-    <tr>
-      <td>Poster</td>
-      <td>$9.00</td>
-      <td id="posterTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
-    </tr>
-    <tr>
-      <td>Vinyl Sticker</td>
-      <td>$12.00</td>
-      <td id="vinylStickerTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
-    </tr>
-    <tr>
-      <td>Vinyl Banner</td>
-      <td>$12.00</td>
-      <td id="vinylBannerTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
-    </tr>
-    <tr>
-      <td>Backlit</td>
-      <td>$12.00</td>
-      <td id="backlitTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
-    </tr>
-    <tr>
-      <td>Cut Out Vinyl Sticker</td>
-      <td>$15.00</td>
-      <td id="cutoutStickerTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
-    </tr>
-    <tr>
-      <td>One Way View</td>
-      <td>$20.00</td>
-      <td id="oneWayTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
-    </tr>
-    <tr>
-      <td>Outdoor Magnetic Sign</td>
-      <td>$25.55</td>
-      <td id="outdoorMagnetTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Foamboard</td>
-      <td>$8.00</td>
-      <td id="foamboardTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
-    </tr>
-    <tr>
-      <td>Poster/Sticker</td>
-      <td>$12.00</td>
-      <td id="posterStickerTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
-    </tr>
-    <tr>
-      <td><strong>Subtotal (Foamboard & Poster/Sticker)</strong></td>
-      <td></td>
-      <td id="subtotalTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
-    </tr>
-  </table>
+  <div class="container">
+    <label for="width">Width (in inches):</label>
+    <input type="number" id="width" placeholder="Enter width" step="any">
+    
+    <label for="length">Length (in inches):</label>
+    <input type="number" id="length" placeholder="Enter length" step="any">
+    
+    <table border="1">
+      <tr>
+        <th>MEDIA</th>
+        <th>UNIT PRICE</th>
+        <th class="total">TOTAL</th> <!-- Apply the "total" class to the "TOTAL" column -->
+      </tr>
+      <tr>
+        <td>Engineering Odd Size</td>
+        <td>$0.75</td>
+        <td id="engineeringTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
+      </tr>
+      <tr>
+        <td>Cloth Banner</td>
+        <td>$5.00</td>
+        <td id="clothTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
+      </tr>
+      <tr>
+        <td>Poster</td>
+        <td>$9.00</td>
+        <td id="posterTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
+      </tr>
+      <tr>
+        <td>Vinyl Sticker</td>
+        <td>$12.00</td>
+        <td id="vinylStickerTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
+      </tr>
+      <tr>
+        <td>Vinyl Banner</td>
+        <td>$12.00</td>
+        <td id="vinylBannerTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
+      </tr>
+      <tr>
+        <td>Backlit</td>
+        <td>$12.00</td>
+        <td id="backlitTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
+      </tr>
+      <tr>
+        <td>Cut Out Vinyl Sticker</td>
+        <td>$15.00</td>
+        <td id="cutoutStickerTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
+      </tr>
+      <tr>
+        <td>One Way View</td>
+        <td>$20.00</td>
+        <td id="oneWayTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
+      </tr>
+      <tr>
+        <td>Outdoor Magnetic Sign</td>
+        <td>$25.55</td>
+        <td id="outdoorMagnetTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Foamboard</td>
+        <td>$8.00</td>
+        <td id="foamboardTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
+      </tr>
+      <tr>
+        <td>Poster/Sticker</td>
+        <td>$12.00</td>
+        <td id="posterStickerTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
+      </tr>
+      <tr>
+        <td><strong>Subtotal (Foamboard & Poster/Sticker)</strong></td>
+        <td></td>
+        <td id="subtotalTotal" class="total">$0.00</td> <!-- Apply the "total" class to this cell -->
+      </tr>
+    </table>
+  </div>
   
   <script>
     const widthInput = document.getElementById("width");
