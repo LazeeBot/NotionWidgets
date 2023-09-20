@@ -123,7 +123,7 @@
       if (printType === "single") {
         cost = quantity * (size === "8.5x11" ? letterCost : size === "8.5x14" ? legalCost : tabloidCost);
       } else if (printType === "double") {
-        cost = quantity * (size === "8.5x11" ? letterCost * 2 : size === "8.5x14" ? legalCost * 2 : tabloidCost * 2);
+        cost = quantity * (size === "8.5x11" ? letterCost : size === "8.5x14" ? legalCost : tabloidCost);
       }
 
       document.getElementById("result").textContent = `Total Cost: $${cost.toFixed(2)}`;
