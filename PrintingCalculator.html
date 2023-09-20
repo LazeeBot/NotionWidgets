@@ -96,55 +96,56 @@
       let letterCost = 0;
       let legalCost = 0;
       let tabloidCost = 0;
-    if (printType === "single") {
-      if (paperType === "regular") {
-        if (inkType === "color") {
-          letterCost = size === "8.5x11" ? 1.5;
-          legalCost = size === "8.5x14" ? 1.75;
-          tabloidCost = size === "11x17" ? 3.5;
+
+      if (printType === "single") {
+        if (paperType === "regular") {
+          if (inkType === "color") {
+            letterCost = size === "8.5x11" ? 1.5 : size === "8.5x14" ? 1.75 : 3.5;
+            legalCost = size === "8.5x11" ? 1.75 : size === "8.5x14" ? 2.5 : 4;
+            tabloidCost = size === "8.5x11" ? 3.5 : size === "8.5x14" ? 4 : 0;
+          } else {
+            letterCost = size === "8.5x11" ? 0.20 : size === "8.5x14" ? 0.35 : 0.45;
+            legalCost = size === "8.5x11" ? 0.35 : size === "8.5x14" ? 0.50 : 0.55;
+            tabloidCost = size === "8.5x11" ? 0.45 : size === "8.5x14" ? 0.55 : 1.05;
+          }
+          cost = quantity * (size === "8.5x11" ? letterCost : size === "8.5x14" ? legalCost : tabloidCost);
         } else {
-          letterCost = size === "8.5x11" ? 0.20;
-          legalCost = size === "8.5x14" ? 0.35;
-          tabloidCost = size === "11x17" ? 0.45;
+          if (inkType === "color") {
+            letterCost = size === "8.5x11" ? 2.10 : 0;
+            legalCost = size === "8.5x11" ? 0 : 0;
+            tabloidCost = size === "8.5x11" ? 4.40 : 0;
+          } else {
+            letterCost = size === "8.5x11" ? 0.80 : 0;
+            legalCost = size === "8.5x11" ? 0 : 0;
+            tabloidCost = size === "8.5x11" ? 1.05 : 0;
+          }
+          cost = quantity * (size === "8.5x11" ? letterCost : size === "8.5x14" ? legalCost : tabloidCost);
         }
-        cost = quantity * (size === "8.5x11" ? letterCost : size === "8.5x14" ? legalCost : tabloidCost);
-      } else {
-            if (inkType === "color") {
-          letterCost = size === "8.5x11" ? 2.10;
-          legalCost = size === "8.5x14" ? 0;
-          tabloidCost = size === "11x17" ? 4.40;
+      } else if (printType === "double") {
+        if (paperType === "regular") {
+          if (inkType === "color") {
+            letterCost = size === "8.5x11" ? 2 : size === "8.5x14" ? 2.50 : 4;
+            legalCost = size === "8.5x11" ? 2.50 : size === "8.5x14" ? 3 : 4.50;
+            tabloidCost = size === "8.5x11" ? 4 : size === "8.5x14" ? 4.50 : 8;
+          } else {
+            letterCost = size === "8.5x11" ? 0.30 : size === "8.5x14" ? 0.50 : 0.55;
+            legalCost = size === "8.5x11" ? 0.50 : size === "8.5x14" ? 0.75 : 0.80;
+            tabloidCost = size === "8.5x11" ? 0.55 : size === "8.5x14" ? 0.80 : 1.30;
+          }
+          cost = quantity * (size === "8.5x11" ? letterCost : size === "8.5x14" ? legalCost : tabloidCost);
         } else {
-          letterCost = size === "8.5x11" ? 0.80;
-          legalCost = size === "8.5x14" ? 0;
-          tabloidCost = size === "11x17" ? 1.05;
+          if (inkType === "color") {
+            letterCost = size === "8.5x11" ? 2.60 : 0;
+            legalCost = size === "8.5x11" ? 0 : 0;
+            tabloidCost = size === "8.5x11" ? 4.90 : 0;
+          } else {
+            letterCost = size === "8.5x11" ? 0.90 : 0;
+            legalCost = size === "8.5x11" ? 0 : 0;
+            tabloidCost = size === "8.5x11" ? 1.15 : 0;
+          }
+          cost = quantity * (size === "8.5x11" ? letterCost : size === "8.5x14" ? legalCost : tabloidCost);
         }
-        cost = quantity * (size === "8.5x11" ? letterCost : size === "8.5x14" ? legalCost : tabloidCost);
       }
-          } else if (printType === "double") {
-if (paperType === "regular") {
-        if (inkType === "color") {
-          letterCost = size === "8.5x11" ? 2;
-          legalCost = size === "8.5x14" ? 2.50;
-          tabloidCost = size === "11x17" ? 4;
-        } else {
-          letterCost = size === "8.5x11" ? 0.30;
-          legalCost = size === "8.5x14" ? 0.50;
-          tabloidCost = size === "11x17" ? 0.55;
-        }
-        cost = quantity * (size === "8.5x11" ? letterCost : size === "8.5x14" ? legalCost : tabloidCost);
-      } else {
-            if (inkType === "color") {
-          letterCost = size === "8.5x11" ? 2.60;
-          legalCost = size === "8.5x14" ? 0;
-          tabloidCost = size === "11x17" ? 4.90;
-        } else {
-          letterCost = size === "8.5x11" ? 0.90;
-          legalCost = size === "8.5x14" ? 0;
-          tabloidCost = size === "11x17" ? 1.15;
-        }
-  cost = quantity * (size === "8.5x11" ? letterCost : size === "8.5x14" ? legalCost : tabloidCost);
-      }
-    }
       document.getElementById("result").textContent = `Total Cost: $${cost.toFixed(2)}`;
     }
   </script>
