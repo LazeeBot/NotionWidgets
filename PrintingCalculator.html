@@ -41,8 +41,8 @@
     #result {
       margin-top: 10px;
       font-weight: bold;
-      font-size: 24px; /* Bigger font size for total cost */
-      color: #333; /* Darker text color for better visibility */
+      font-size: 24px;
+      color: red; /* Red color for total cost */
     }
   </style>
 </head>
@@ -92,48 +92,38 @@
       const inkType = document.getElementById("inkType").value;
       let cost = 0;
 
-      if (paperType === "premium") {
-        // Premium adjustments
-        if (size === "8.5x11") {
-          if (inkType === "color") {
-            cost = quantity * (printType === "single" ? 1.5 + 0.60 : 2.0 + 0.60);
-          } else {
-            cost = quantity * (printType === "single" ? 0.20 + 0.60 : 0.30 + 0.60);
-          }
-        } else if (size === "8.5x14") {
-          if (inkType === "color") {
-            cost = quantity * (printType === "single" ? 1.75 + 0.60 : 2.5 + 0.60);
-          } else {
-            cost = quantity * (printType === "single" ? 0.35 + 0.60 : 0.50 + 0.60);
-          }
-        } else if (size === "11x17") {
-          if (inkType === "color") {
-            cost = quantity * (printType === "single" ? 3.5 + 0.60 : 4.0 + 0.60);
-          } else {
-            cost = quantity * (printType === "single" ? 0.45 + 0.60 : 0.55 + 0.60);
-          }
+      // Define the cost variables based on paper type, ink type, and printing type
+      let letterCost = 0;
+      let legalCost = 0;
+      let tabloidCost = 0;
+
+      if (paperType === "regular") {
+        if (inkType === "color") {
+          letterCost = printType === "single" ? 1.5 : 2.0;
+          legalCost = printType === "single" ? 1.75 : 2.5;
+          tabloidCost = printType === "single" ? 3.5 : 4.0;
+        } else {
+          letterCost = printType === "single" ? 0.20 : 0.30;
+          legalCost = printType === "single" ? 0.35 : 0.50;
+          tabloidCost = printType === "single" ? 0.45 : 0.55;
         }
-      } else {
-        // Regular paper calculations
-        if (size === "8.5x11") {
-          if (inkType === "color") {
-            cost = quantity * (printType === "single" ? 1.5 : 2.0);
-          } else {
-            cost = quantity * (printType === "single" ? 0.20 : 0.30);
-          }
-        } else if (size === "8.5x14") {
-          if (inkType === "color") {
-            cost = quantity * (printType === "single" ? 1.75 : 2.5);
-          } else {
-            cost = quantity * (printType === "single" ? 0.35 : 0.50);
-          }
-        } else if (size === "11x17") {
-          if (inkType === "color") {
-            cost = quantity * (printType === "single" ? 3.5 : 4.0);
-          } else {
-            cost = quantity * (printType === "single" ? 0.45 : 0.55);
-          }
+      } else if (paperType === "premium") {
+        if (inkType === "color") {
+          letterCost = printType === "single" ? 2.10 : 2.60;
+          tabloidCost = printType === "single" ? 4.40 : 4.90;
+        } else {
+          letterCost = printType === "single" ? 0.80 : 0.90;
+          tabloidCost = printType === "single" ? 1.05 : 1.15;
         }
+      }
+
+      // Calculate the total cost based on paper size
+      if (size === "8.5x11") {
+        cost = quantity * (printType === "single" ? letterCost : letterCost + 0.5);
+      } else if (size === "8.5x14") {
+        cost = quantity * (printType === "single" ? legalCost : legalCost + 0.75);
+      } else if (size === "11x17") {
+        cost = quantity * (printType === "single" ? tabloidCost : tabloidCost + 0.5);
       }
 
       document.getElementById("result").textContent = `Total Cost: $${cost.toFixed(2)}`;
