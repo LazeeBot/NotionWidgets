@@ -19,7 +19,7 @@
       font-weight: bold;
     }
 
-    select, input[type="number"], input[type="radio"] {
+    select, input[type="number"], select[name="printType"], select[name="paperType"] {
       width: 100%;
       padding: 8px;
       margin-bottom: 10px;
@@ -57,22 +57,25 @@
       <option value="11x17">11x17</option>
     </select>
     
-    <label>Print Options:</label>
-    <div>
-      <label for="singleSide">Single Side</label>
-      <input type="radio" id="singleSide" name="printType" value="single" checked>
-    </div>
-    <div>
-      <label for="doubleSide">Double Side</label>
-      <input type="radio" id="doubleSide" name="printType" value="double">
-    </div>
-    
-    <label for="paperType">Paper Type:</label>
-    <select id="paperType">
-      <option value="color">Color</option>
-      <option value="bw">Black & White</option>
+    <label for="printType">Print Type:</label>
+    <select name="printType" id="printType">
+      <option value="single">Single Side</option>
+      <option value="double">Double Side</option>
     </select>
     
+    <label for="paperType">Paper Type:</label>
+    <select name="paperType" id="paperType">
+      <option value="color">Color</option>
+      <option value="bw">Black & White</option>
+      <option value="premium">Premium</option>
+    </select>
+    
+    <label for="inkType">Ink Type:</label>
+    <select name="inkType" id="inkType">
+      <option value="bw">BW</option>
+      <option value="color">Color</option>
+    </select>
+
     <button onclick="calculateCost()">Calculate Cost</button>
 
     <div id="result"></div>
@@ -82,28 +85,33 @@
     function calculateCost() {
       const quantity = parseFloat(document.getElementById("quantity").value);
       const size = document.getElementById("size").value;
-      const printType = document.querySelector('input[name="printType"]:checked').value;
+      const printType = document.getElementById("printType").value;
       const paperType = document.getElementById("paperType").value;
+      const inkType = document.getElementById("inkType").value;
       let cost = 0;
 
       if (size === "8.5x11") {
         if (printType === "single") {
-          cost = quantity * (paperType === "color" ? 1.5 : 0.20);
+          cost = quantity * (inkType === "color" ? 1.5 : 0.20);
         } else {
-          cost = quantity * (paperType === "color" ? 2.0 : 0.30);
+          cost = quantity * (inkType === "color" ? 2.0 : 0.30);
         }
       } else if (size === "8.5x14") {
         if (printType === "single") {
-          cost = quantity * (paperType === "color" ? 1.75 : 0.35);
+          cost = quantity * (inkType === "color" ? 1.75 : 0.35);
         } else {
-          cost = quantity * (paperType === "color" ? 2.5 : 0.50);
+          cost = quantity * (inkType === "color" ? 2.5 : 0.50);
         }
       } else if (size === "11x17") {
         if (printType === "single") {
-          cost = quantity * (paperType === "color" ? 3.5 : 0.45);
+          cost = quantity * (inkType === "color" ? 3.5 : 0.45);
         } else {
-          cost = quantity * (paperType === "color" ? 4.0 : 0.55);
+          cost = quantity * (inkType === "color" ? 4.0 : 0.55);
         }
+      }
+
+      if (paperType === "premium") {
+        cost *= 0.60;
       }
 
       document.getElementById("result").textContent = `Total Cost: $${cost.toFixed(2)}`;
