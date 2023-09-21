@@ -47,23 +47,29 @@
       margin-top: 10px;
       font-weight: bold;
       font-size: 24px;
-      color: red;
+      color: red; /* Red color for total cost */
     }
 
     table {
-      border-collapse: collapse;
       width: 100%;
+      border-collapse: collapse;
     }
 
     th, td {
-      border: 1px solid #ddd;
       padding: 8px;
       text-align: left;
+      border-bottom: 1px solid #ddd;
     }
 
     th {
-      background-color: #f2f2f2;
+      background-color: #333;
+      color: white;
     }
+
+    td:last-child {
+      text-align: center;
+    }
+
   </style>
 </head>
 <body>
@@ -102,7 +108,7 @@
 
     <div id="result"></div>
 
-    <table id="costTable">
+    <table>
       <thead>
         <tr>
           <th>Size</th>
@@ -118,9 +124,12 @@
       <tbody>
       </tbody>
     </table>
+
   </div>
 
   <script>
+    let rowCount = 0;
+
     function calculateCost() {
       const quantity = parseFloat(document.getElementById("quantity").value);
       const size = document.getElementById("size").value;
@@ -145,7 +154,7 @@
             legalCost = size === "8.5x14" ? 0.35 : 0;
             tabloidCost = size === "11x17" ? 0.45 : 0;
           }
-          cost = size === "8.5x11" ? letterCost : size === "8.5x14" ? legalCost : tabloidCost;
+          cost = quantity * (size === "8.5x11" ? letterCost : size === "8.5x14" ? legalCost : tabloidCost);
         } else {
           if (inkType === "color") {
             letterCost = size === "8.5x11" ? 2.10 : 0;
@@ -156,7 +165,7 @@
             legalCost = size === "8.5x14" ? 0 : 0;
             tabloidCost = size === "11x17" ? 1.05 : 0;
           }
-          cost = size === "8.5x11" ? letterCost : size === "8.5x14" ? legalCost : tabloidCost;
+          cost = quantity * (size === "8.5x11" ? letterCost : size === "8.5x14" ? legalCost : tabloidCost);
         }
       } else if (printType === "double") {
         if (paperType === "regular") {
@@ -169,7 +178,7 @@
             legalCost = size === "8.5x14" ? 0.50 : 0;
             tabloidCost = size === "11x17" ? 0.55 : 0;
           }
-          cost = size === "8.5x11" ? letterCost : size === "8.5x14" ? legalCost : tabloidCost;
+          cost = quantity * (size === "8.5x11" ? letterCost : size === "8.5x14" ? legalCost : tabloidCost);
         } else {
           if (inkType === "color") {
             letterCost = size === "8.5x11" ? 2.60 : 0;
@@ -180,17 +189,17 @@
             legalCost = size === "8.5x14" ? 0 : 0;
             tabloidCost = size === "11x17" ? 1.15 : 0;
           }
-          cost = size === "8.5x11" ? letterCost : size === "8.5x14" ? legalCost : tabloidCost;
+          cost = quantity * (size === "8.5x11" ? letterCost : size === "8.5x14" ? legalCost : tabloidCost);
         }
       }
-
-      // Display the total cost
-      document.getElementById("result").textContent = `Total Cost: $${(cost * quantity).toFixed(2)}`;
+      document.getElementById("result").textContent = `Total Cost: $${cost.toFixed(2)}`;
 
       // Add the calculation result to the table
-    const table = document.getElementById("costTable");
-      const tbody = table.querySelector("tbody");
-      const newRow = tbody.insertRow();
+      const table = document.querySelector("table tbody");
+      const newRow = table.insertRow();
+      const rowId = "row_" + rowCount++;
+      newRow.id = rowId;
+
       const cell1 = newRow.insertCell(0);
       const cell2 = newRow.insertCell(1);
       const cell3 = newRow.insertCell(2);
@@ -198,6 +207,7 @@
       const cell5 = newRow.insertCell(4);
       const cell6 = newRow.insertCell(5);
       const cell7 = newRow.insertCell(6);
+      const cell8 = newRow.insertCell(7);
 
       cell1.textContent = size;
       cell2.textContent = printType === "single" ? "Single Side" : "Double Side";
@@ -207,13 +217,13 @@
       cell6.textContent = `$${cost.toFixed(2)}`;
       cell7.textContent = `$${(cost * quantity).toFixed(2)}`;
 
-      // Add delete button to the row
       const deleteButton = document.createElement("button");
       deleteButton.textContent = "Delete";
       deleteButton.onclick = function () {
-        tbody.deleteRow(newRow.rowIndex);
+        const rowToDelete = document.getElementById(rowId);
+        table.deleteRow(rowToDelete.rowIndex);
       };
-      cell7.appendChild(deleteButton);
+      cell8.appendChild(deleteButton);
     }
   </script>
 </body>
