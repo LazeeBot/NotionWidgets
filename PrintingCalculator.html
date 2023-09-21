@@ -3,20 +3,20 @@
 <head>
   <title>Printing Cost Calculator</title>
   <style>
-   body {
+    body {
       font-family: Arial, sans-serif;
       background-color: #f5f5f5;
       margin: 0;
       padding: 0;
     }
-    
+
     h1 {
       text-align: center;
       padding: 20px;
       background-color: #333;
       color: white;
     }
-    
+
     .container {
       max-width: 800px;
       margin: 0 auto;
@@ -49,34 +49,50 @@
       font-size: 24px;
       color: red; /* Red color for total cost */
     }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
   </style>
 </head>
 <body>
   <h1>Printing Cost Calculator</h1>
   <div class="container">
-    
+
     <label for="quantity">Quantity:</label>
     <input type="number" id="quantity" placeholder="Enter quantity" step="1" min="1">
-    
+
     <label for="size">Paper Size:</label>
     <select id="size">
       <option value="8.5x11">8.5x11</option>
       <option value="8.5x14">8.5x14</option>
       <option value="11x17">11x17</option>
     </select>
-    
+
     <label for="printType">Printing Type:</label>
     <select id="printType">
       <option value="single">Single Side</option>
       <option value="double">Double Side</option>
     </select>
-    
+
     <label for="paperType">Paper Type:</label>
     <select id="paperType">
       <option value="regular">Regular Paper</option>
       <option value="premium">Premium Paper</option>
     </select>
-    
+
     <label for="inkType">Ink Type:</label>
     <select id="inkType">
       <option value="bw">Black & White</option>
@@ -86,6 +102,21 @@
     <button onclick="calculateCost()">Calculate Cost</button>
 
     <div id="result"></div>
+
+    <table id="costTable">
+      <thead>
+        <tr>
+          <th>Quantity</th>
+          <th>Size</th>
+          <th>Printing Type</th>
+          <th>Paper Type</th>
+          <th>Ink Type</th>
+          <th>Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
   </div>
 
   <script>
@@ -152,6 +183,22 @@
         }
       }
       document.getElementById("result").textContent = `Total Cost: $${cost.toFixed(2)}`;
+
+      // Add the cost breakdown to the table
+      const costTable = document.getElementById("costTable").getElementsByTagName('tbody')[0];
+      const newRow = costTable.insertRow(costTable.rows.length);
+      const cells = newRow.insertCell(-1);
+      cells.innerHTML = quantity;
+      cells = newRow.insertCell(-1);
+      cells.innerHTML = size;
+      cells = newRow.insertCell(-1);
+      cells.innerHTML = printType === "single" ? "Single Side" : "Double Side";
+      cells = newRow.insertCell(-1);
+      cells.innerHTML = paperType === "regular" ? "Regular Paper" : "Premium Paper";
+      cells = newRow.insertCell(-1);
+      cells.innerHTML = inkType === "bw" ? "Black & White" : "Color";
+      cells = newRow.insertCell(-1);
+      cells.innerHTML = `$${cost.toFixed(2)}`;
     }
   </script>
 </body>
