@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Printing Cost Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+      padding: 20px;
+      background-color: #333;
+      color: white;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    select, input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background-color: #333;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #555;
+    }
+
+    #result {
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 24px;
+      color: red;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <h1>Printing Cost Calculator</h1>
+  <div class="container">
+
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity" placeholder="Enter quantity" step="1" min="1">
+
+    <label for="size">Paper Size:</label>
+    <select id="size">
+      <option value="8.5x11">8.5x11</option>
+      <option value="8.5x14">8.5x14</option>
+      <option value="11x17">11x17</option>
+    </select>
+
+    <label for="printType">Printing Type:</label>
+    <select id="printType">
+      <option value="single">Single Side</option>
+      <option value="double">Double Side</option>
+    </select>
+
+    <label for="paperType">Paper Type:</label>
+    <select id="paperType">
+      <option value="regular">Regular Paper</option>
+      <option value="premium">Premium Paper</option>
+    </select>
+
+    <label for="inkType">Ink Type:</label>
+    <select id="inkType">
+      <option value="bw">Black & White</option>
+      <option value="color">Color</option>
+    </select>
+
+    <button onclick="calculateCost()">Calculate Cost</button>
+
+    <div id="result"></div>
+
+    <table id="costTable">
+      <thead>
+        <tr>
+          <th>Size</th>
+          <th>Printing Type</th>
+          <th>Paper Type</th>
+          <th>Ink Type</th>
+          <th>Quantity</th>
+          <th>Price per Piece</th>
+          <th>Total Cost</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+
+<script>
+    function calculateCost() {
+      const quantity = parseFloat(document.getElementById("quantity").value);
+      const size = document.getElementById("size").value;
+      const printType = document.getElementById("printType").value;
+      const paperType = document.getElementById("paperType").value;
+      const inkType = document.getElementById("inkType").value;
+      let cost = 0;
+
+      // Define cost variables
+      let letterCost = 0;
+      let legalCost = 0;
+      let tabloidCost = 0;
+
+      if (printType === "single") {
+        if (paperType === "regular") {
+          if (inkType === "color") {
+            letterCost = size === "8.5x11" ? 1.5 : 0;
+            legalCost = size === "8.5x14" ? 1.75 : 0;
+            tabloidCost = size === "11x17" ? 3.5 : 0;
+          } else {
+            letterCost = size === "8.5x11" ? 0.20 : 0;
+            legalCost = size === "8.5x14" ? 0.35 : 0;
+            tabloidCost = size === "11x17" ? 0.45 : 0;
+          }
+          cost = size === "8.5x11" ? letterCost : size === "8.5x14" ? legalCost : tabloidCost;
+        } else {
+          if (inkType === "color") {
+            letterCost = size === "8.5x11" ? 2.10 : 0;
+            legalCost = size === "8.5x14" ? 0 : 0;
+            tabloidCost = size === "11x17" ? 4.40 : 0;
+          } else {
+            letterCost = size === "8.5x11" ? 0.80 : 0;
+            legalCost = size === "8.5x14" ? 0 : 0;
+            tabloidCost = size === "11x17" ? 1.05 : 0;
+          }
+          cost = size === "8.5x11" ? letterCost : size === "8.5x14" ? legalCost : tabloidCost;
+        }
+      } else if (printType === "double") {
+        if (paperType === "regular") {
+          if (inkType === "color") {
+            letterCost = size === "8.5x11" ? 2 : 0;
+            legalCost = size === "8.5x14" ? 2.50 : 0;
+            tabloidCost = size === "11x17" ? 4 : 0;
+          } else {
+            letterCost = size === "8.5x11" ? 0.30 : 0;
+            legalCost = size === "8.5x14" ? 0.50 : 0;
+            tabloidCost = size === "11x17" ? 0.55 : 0;
+          }
+          cost = size === "8.5x11" ? letterCost : size === "8.5x14" ? legalCost : tabloidCost;
+        } else {
+          if (inkType === "color") {
+            letterCost = size === "8.5x11" ? 2.60 : 0;
+            legalCost = size === "8.5x14" ? 0 : 0;
+            tabloidCost = size === "11x17" ? 4.90 : 0;
+          } else {
+            letterCost = size === "8.5x11" ? 0.90 : 0;
+            legalCost = size === "8.5x14" ? 0 : 0;
+            tabloidCost = size === "11x17" ? 1.15 : 0;
+          }
+          cost = size === "8.5x11" ? letterCost : size === "8.5x14" ? legalCost : tabloidCost;
+        }
+      }
+
+      // Calculate the total cost
+      const totalCost = cost * quantity;
+
+      // Apply quantity-based discounts
+      let discount = 0;
+      if (quantity >= 100 && quantity < 500) {
+        discount = 0.1; // 10% discount for quantities between 100 and 499
+      } else if (quantity >= 500 && quantity < 1000) {
+        discount = 0.15; // 15% discount for quantities between 500 and 999
+      } else if (quantity >= 1000) {
+        discount = 0.2; // 20% discount for quantities of 1000 or more
+      }
+
+      // Apply the discount to the total cost
+      const discountedCost = totalCost * (1 - discount);
+
+      // Display the total cost and discounted cost
+      const resultElement = document.getElementById("result");
+      resultElement.textContent = `Total Cost: $${totalCost.toFixed(2)} (Discounted: $${discountedCost.toFixed(2)})`;
+
+      // Add the calculation result to the table
+      const table = document.getElementById("costTable");
+      const tbody = table.querySelector("tbody");
+      const newRow = tbody.insertRow();
+      const cell1 = newRow.insertCell(0);
+      const cell2 = newRow.insertCell(1);
+      const cell3 = newRow.insertCell(2);
+      const cell4 = newRow.insertCell(3);
+      const cell5 = newRow.insertCell(4);
+      const cell6 = newRow.insertCell(5);
+      const cell7 = newRow.insertCell(6);
+      const cell8 = newRow.insertCell(7);
+
+      cell1.textContent = size;
+      cell2.textContent = printType === "single" ? "Single Side" : "Double Side";
+      cell3.textContent = paperType === "regular" ? "Regular Paper" : "Premium Paper";
+      cell4.textContent = inkType === "bw" ? "Black & White" : "Color";
+      cell5.textContent = quantity;
+      cell6.textContent = `$${cost.toFixed(2)}`;
+      cell7.textContent = `$${totalCost.toFixed(2)} (Discounted: $${discountedCost.toFixed(2)})`;
+
+      // Add delete button to the row
+      const deleteButton = document.createElement("button");
+      deleteButton.textContent = "Delete";
+      deleteButton.onclick = function () {
+        const rowIndex = newRow.rowIndex;
+        table.deleteRow(rowIndex);
+      };
+      cell8.appendChild(deleteButton);
+    }
+  </script>
+</body>
+</html>
