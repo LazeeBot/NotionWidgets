@@ -119,7 +119,6 @@
       </tbody>
     </table>
   </div>
-
 <script>
     function calculateCost() {
       const quantity = parseFloat(document.getElementById("quantity").value);
@@ -197,12 +196,12 @@
         discount = 0.2; // 20% discount for quantities of 1000 or more
       }
 
-      // Calculate the discounted cost
+      // Apply the discount to the total cost
       const discountedCost = totalCost * (1 - discount);
 
-      // Display the total cost with discount
+      // Display the total cost and discounted cost
       const resultElement = document.getElementById("result");
-      resultElement.innerHTML = `Total Cost: $${discountedCost.toFixed(2)}`;
+      resultElement.textContent = `Total Cost: $${totalCost.toFixed(2)} (Discounted: $${discountedCost.toFixed(2)})`;
 
       // Add the calculation result to the table
       const table = document.getElementById("costTable");
@@ -223,13 +222,14 @@
       cell4.textContent = inkType === "bw" ? "Black & White" : "Color";
       cell5.textContent = quantity;
       cell6.textContent = `$${cost.toFixed(2)}`;
-      cell7.innerHTML = `<span style="color: red; font-weight: bold;">$${discountedCost.toFixed(2)}</span>`;
+      cell7.textContent = `$${totalCost.toFixed(2)} (Discounted: $${discountedCost.toFixed(2)})`;
 
       // Add delete button to the row
       const deleteButton = document.createElement("button");
       deleteButton.textContent = "Delete";
       deleteButton.onclick = function () {
-        tbody.deleteRow(newRow.rowIndex);
+        const rowIndex = newRow.rowIndex;
+        table.deleteRow(rowIndex);
       };
       cell8.appendChild(deleteButton);
     }
