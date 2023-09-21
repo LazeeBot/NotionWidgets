@@ -111,6 +111,7 @@
           <th>Ink Type</th>
           <th>Quantity</th>
           <th>Price per Piece</th>
+          <th>Total Cost</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -197,6 +198,7 @@
       const cell5 = newRow.insertCell(4);
       const cell6 = newRow.insertCell(5);
       const cell7 = newRow.insertCell(6);
+      const cell8 = newRow.insertCell(7);
 
       cell1.textContent = size;
       cell2.textContent = printType === "single" ? "Single Side" : "Double Side";
@@ -204,6 +206,7 @@
       cell4.textContent = inkType === "bw" ? "Black & White" : "Color";
       cell5.textContent = quantity;
       cell6.textContent = `$${cost.toFixed(2)}`;
+      cell7.textContent = `$${(cost * quantity).toFixed(2)}`;
 
       // Add delete button to the row
       const deleteButton = document.createElement("button");
@@ -211,7 +214,7 @@
       deleteButton.onclick = function () {
         tbody.deleteRow(newRow.rowIndex);
       };
-      cell7.appendChild(deleteButton);
+      cell8.appendChild(deleteButton);
     }
   </script>
 </body>
