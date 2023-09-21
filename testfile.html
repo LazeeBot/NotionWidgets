@@ -197,12 +197,12 @@
         discount = 0.2; // 20% discount for quantities of 1000 or more
       }
 
-      // Apply the discount to the total cost
+      // Calculate the discounted cost
       const discountedCost = totalCost * (1 - discount);
 
-      // Display the total cost and discounted cost
+      // Display the total cost with discount
       const resultElement = document.getElementById("result");
-      resultElement.textContent = `Total Cost: $${totalCost.toFixed(2)} (Discounted: $${discountedCost.toFixed(2)})`;
+      resultElement.innerHTML = `Total Cost: $${discountedCost.toFixed(2)}`;
 
       // Add the calculation result to the table
       const table = document.getElementById("costTable");
@@ -223,14 +223,13 @@
       cell4.textContent = inkType === "bw" ? "Black & White" : "Color";
       cell5.textContent = quantity;
       cell6.textContent = `$${cost.toFixed(2)}`;
-      cell7.textContent = `$${totalCost.toFixed(2)} (Discounted: $${discountedCost.toFixed(2)})`;
+      cell7.innerHTML = `<span style="color: red; font-weight: bold;">$${discountedCost.toFixed(2)}</span>`;
 
       // Add delete button to the row
       const deleteButton = document.createElement("button");
       deleteButton.textContent = "Delete";
       deleteButton.onclick = function () {
-        const rowIndex = newRow.rowIndex;
-        table.deleteRow(rowIndex);
+        tbody.deleteRow(newRow.rowIndex);
       };
       cell8.appendChild(deleteButton);
     }
