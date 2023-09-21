@@ -212,7 +212,8 @@
       const deleteButton = document.createElement("button");
       deleteButton.textContent = "Delete";
       deleteButton.onclick = function () {
-        tbody.deleteRow(newRow.rowIndex);
+        const rowIndex = newRow.rowIndex;
+        table.deleteRow(rowIndex);
       };
       cell8.appendChild(deleteButton);
     }
