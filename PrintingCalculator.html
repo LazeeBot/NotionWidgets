@@ -188,9 +188,12 @@
       document.getElementById("result").textContent = `Total Cost: $${(cost * quantity).toFixed(2)}`;
 
       // Add the calculation result to the table
-     const table = document.getElementById("costTable");
+    const table = document.getElementById("costTable");
   const tbody = table.querySelector("tbody");
   const newRow = tbody.insertRow();
+  const rowId = "row_" + rowCount++; // Generate a unique row identifier
+  newRow.id = rowId; // Set the id attribute of the new row
+
   const cell1 = newRow.insertCell(0);
   const cell2 = newRow.insertCell(1);
   const cell3 = newRow.insertCell(2);
@@ -198,7 +201,7 @@
   const cell5 = newRow.insertCell(4);
   const cell6 = newRow.insertCell(5);
   const cell7 = newRow.insertCell(6);
-  const cell8 = newRow.insertCell(7); // Add a new cell for Action
+  const cell8 = newRow.insertCell(7);
 
   cell1.textContent = size;
   cell2.textContent = printType === "single" ? "Single Side" : "Double Side";
@@ -208,11 +211,11 @@
   cell6.textContent = `$${cost.toFixed(2)}`;
   cell7.textContent = `$${(cost * quantity).toFixed(2)}`;
 
-  // Add delete button to the row in the Action column
   const deleteButton = document.createElement("button");
   deleteButton.textContent = "Delete";
   deleteButton.onclick = function () {
-    tbody.deleteRow(newRow.rowIndex);
+    const rowToDelete = document.getElementById(rowId); // Get the row by id
+    tbody.removeChild(rowToDelete); // Remove the row from the table
   };
   cell8.appendChild(deleteButton);
     }
