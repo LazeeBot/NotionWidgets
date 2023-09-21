@@ -47,13 +47,12 @@
       margin-top: 10px;
       font-weight: bold;
       font-size: 24px;
-      color: red; /* Red color for total cost */
+      color: red;
     }
 
     table {
-      width: 100%;
       border-collapse: collapse;
-      margin-top: 20px;
+      width: 100%;
     }
 
     th, td {
@@ -106,12 +105,11 @@
     <table id="costTable">
       <thead>
         <tr>
-          <th>Quantity</th>
+          <th>Cost</th>
           <th>Size</th>
           <th>Printing Type</th>
           <th>Paper Type</th>
           <th>Ink Type</th>
-          <th>Cost</th>
         </tr>
       </thead>
       <tbody>
@@ -184,21 +182,21 @@
       }
       document.getElementById("result").textContent = `Total Cost: $${cost.toFixed(2)}`;
 
-      // Add the cost breakdown to the table
-      const costTable = document.getElementById("costTable").getElementsByTagName('tbody')[0];
-      const newRow = costTable.insertRow(costTable.rows.length);
-      const cells = newRow.insertCell(-1);
-      cells.innerHTML = quantity;
-      cells = newRow.insertCell(-1);
-      cells.innerHTML = size;
-      cells = newRow.insertCell(-1);
-      cells.innerHTML = printType === "single" ? "Single Side" : "Double Side";
-      cells = newRow.insertCell(-1);
-      cells.innerHTML = paperType === "regular" ? "Regular Paper" : "Premium Paper";
-      cells = newRow.insertCell(-1);
-      cells.innerHTML = inkType === "bw" ? "Black & White" : "Color";
-      cells = newRow.insertCell(-1);
-      cells.innerHTML = `$${cost.toFixed(2)}`;
+      // Add the calculation result to the table
+      const table = document.getElementById("costTable");
+      const tbody = table.querySelector("tbody");
+      const newRow = tbody.insertRow();
+      const cell1 = newRow.insertCell(0);
+      const cell2 = newRow.insertCell(1);
+      const cell3 = newRow.insertCell(2);
+      const cell4 = newRow.insertCell(3);
+      const cell5 = newRow.insertCell(4);
+
+      cell1.textContent = `$${cost.toFixed(2)}`;
+      cell2.textContent = size;
+      cell3.textContent = printType === "single" ? "Single Side" : "Double Side";
+      cell4.textContent = paperType === "regular" ? "Regular Paper" : "Premium Paper";
+      cell5.textContent = inkType === "bw" ? "Black & White" : "Color";
     }
   </script>
 </body>
