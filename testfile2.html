@@ -255,6 +255,13 @@ function calculateCost() {
     const resultElement = document.getElementById("result");
     resultElement.textContent = `Total Cost: $${totalCost.toFixed(2)} (Discounted: $${discountedCost.toFixed(2)})`;
 
+    // Get or create the tbody element inside the table
+  const table = document.getElementById("costTable");
+  let tbody = table.querySelector("tbody");
+  if (!tbody) {
+    tbody = document.createElement("tbody");
+    table.appendChild(tbody);
+  }
     // Add the calculation result to the table
     const table = document.getElementById("costTable");
     const tbody = table.querySelector("tbody");
