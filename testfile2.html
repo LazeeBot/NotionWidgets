@@ -203,7 +203,12 @@ function calculateCost() {
   } else if (inkType === "color") {
     if (quantity >= 50 && quantity < 100) {
       discount = size === "8.5x11" && printType === "single" ? 1.25 : size === "8.5x11" && printType === "double" ? 1.95 : size === "11x17" && printType === "single" ? 2.50 : size === "11x17" && printType === "double" ? 3.00 : 0;
-   cost = cost - (cost-discount);
+   if (paperType === "regular") {
+      cost = cost - (cost-discount);
+     else{
+      cost = cost - (cost-discount) + 0.60;
+   }
+   }
     } else if (quantity >= 100 && quantity < 250) {
       discount = size === "8.5x11" && printType === "single" ? 1.15 : size === "8.5x11" && printType === "double" ? 1.85 : size === "11x17" && printType === "single" ? 2.25 : size === "11x17" && printType === "double" ? 2.75 : 0;
  cost = cost - (cost-discount);
