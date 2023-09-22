@@ -69,7 +69,6 @@
 <body>
   <h1>Printing Cost Calculator</h1>
   <div class="container">
-
     <label for="quantity">Quantity:</label>
     <input type="number" id="quantity" placeholder="Enter quantity" step="1" min="1">
 
@@ -111,7 +110,7 @@
           <th>Ink Type</th>
           <th>Quantity</th>
           <th>Price per Piece</th>
-          <th>Total Cost</th>
+          <th>Total Cost (Discount)</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -119,8 +118,9 @@
       </tbody>
     </table>
   </div>
-<script>
-function calculateCost() {
+
+  <script>
+   function calculateCost() {
   const quantity = parseFloat(document.getElementById("quantity").value);
   const size = document.getElementById("size").value;
   const printType = document.getElementById("printType").value;
@@ -183,12 +183,12 @@ function calculateCost() {
     }
   }
 
-    // Apply quantity-based discounts for black & white and color prints
+  // Apply quantity-based discounts for black & white and color prints
   let discount = 0;
 
   if (inkType === "bw") {
     if (quantity >= 500 && quantity < 1000) {
-      discount = printType === "single" ? 0.01 : printType === "double" ?  0.02 : 0;
+      discount = printType === "single" ? 0.01 : printType === "double" ? 0.02 : 0;
     } else if (quantity >= 1000 && quantity < 5000) {
       discount = printType === "single" ? 0.02 : printType === "double" ? 0.03 : 0;
     } else if (quantity >= 5000 && quantity < 10000) {
@@ -198,64 +198,59 @@ function calculateCost() {
     } else if (quantity >= 20000) {
       discount = printType === "single" ? 0.05 : printType === "double" ? 0.07 : 0;
     }
-    cost = cost-discount;
-    
+     cost = cost-discount;
   } else if (inkType === "color") {
     if (quantity >= 50 && quantity < 100) {
       discount = size === "8.5x11" && printType === "single" ? 1.25 : size === "8.5x11" && printType === "double" ? 1.95 : size === "11x17" && printType === "single" ? 2.50 : size === "11x17" && printType === "double" ? 3.00 : 0;
-   if (paperType === "regular") {
-      cost = cost - (cost-discount);
-   }
-     else{
-      cost = cost - (cost-discount) + 0.60;
-   }
-       
+      if (paperType === "regular") {
+        cost = cost - discount;
+      } else {
+        cost = cost - discount + 0.60;
+      }
     } else if (quantity >= 100 && quantity < 250) {
       discount = size === "8.5x11" && printType === "single" ? 1.15 : size === "8.5x11" && printType === "double" ? 1.85 : size === "11x17" && printType === "single" ? 2.25 : size === "11x17" && printType === "double" ? 2.75 : 0;
-   if (paperType === "regular") {
-      cost = cost - (cost-discount);
-   }
-     else{
-      cost = cost - (cost-discount) + 0.60;
-   }
+      if (paperType === "regular") {
+        cost = cost - discount;
+      } else {
+        cost = cost - discount + 0.60;
+      }
     } else if (quantity >= 250 && quantity < 500) {
       discount = size === "8.5x11" && printType === "single" ? 1.00 : size === "8.5x11" && printType === "double" ? 1.80 : size === "11x17" && printType === "single" ? 2.05 : size === "11x17" && printType === "double" ? 2.50 : 0;
-     if (paperType === "regular") {
-      cost = cost - (cost-discount);
-   }
-     else{
-      cost = cost - (cost-discount) + 0.60;
-   }
+      if (paperType === "regular") {
+        cost = cost - discount;
+      } else {
+        cost = cost - discount + 0.60;
+      }
     } else if (quantity >= 500 && quantity < 1000) {
       discount = size === "8.5x11" && printType === "single" ? 0.90 : size === "8.5x11" && printType === "double" ? 1.50 : size === "11x17" && printType === "single" ? 2.00 : size === "11x17" && printType === "double" ? 2.25 : 0;
-     if (paperType === "regular") {
-      cost = cost - (cost-discount);
-   }
-     else{
-      cost = cost - (cost-discount) + 0.60;
-   }
+      if (paperType === "regular") {
+        cost = cost - discount;
+      } else {
+        cost = cost - discount + 0.60;
+      }
     } else if (quantity >= 1000) {
       discount = size === "8.5x11" && printType === "single" ? 0.80 : size === "8.5x11" && printType === "double" ? 1.25 : size === "11x17" && printType === "single" ? 1.90 : size === "11x17" && printType === "double" ? 2.10 : 0;
-     if (paperType === "regular") {
-      cost = cost - (cost-discount);
-   }
-     else{
-      cost = cost - (cost-discount) + 0.60;
-   }
+      if (paperType === "regular") {
+        cost = cost - discount;
+      } else {
+        cost = cost - discount + 0.60;
+      }
     }
   }
 
- // Calculate the total cost
-    const totalCost = cost * quantity;
+  // Calculate the total cost
+  const totalCost = cost * quantity;
 
-    // Calculate the discounted cost
-    const discountedCost = totalCost - (totalCost * discount);
+  // Apply quantity-based discounts
+  let discountText = "";
+  if (discount > 0) {
+    discountText = `${(discount * 100).toFixed(0)}% discount`;
+  }
 
-    // Display the total cost and discounted cost
-    const resultElement = document.getElementById("result");
-    resultElement.textContent = `Total Cost: $${totalCost.toFixed(2)} (Discounted: $${discountedCost.toFixed(2)})`;
+  // Calculate the discounted cost
+  const discountedCost = totalCost * (1 - discount);
 
-   // Display the total cost with discount
+  // Display the total cost with discount
   const resultElement = document.getElementById("result");
   resultElement.innerHTML = `Total Cost: $${discountedCost.toFixed(2)} (${discountText})`;
 
@@ -288,7 +283,8 @@ function calculateCost() {
     table.deleteRow(rowIndex);
   };
   cell8.appendChild(deleteButton);
-    }
+}
+
   </script>
 </body>
 </html>
