@@ -182,12 +182,7 @@
       cost = size === "8.5x11" ? letterCost : size === "8.5x14" ? legalCost : tabloidCost;
     }
   }
-
-  // Calculate the total cost
-  const totalCost = cost * quantity;
-
-  // Apply quantity-based discounts for black & white and color prints
-  let discount = 0;
+      let discount = 0;
 
   if (inkType === "bw") {
     if (quantity >= 500 && quantity < 1000) {
@@ -215,8 +210,13 @@
     }
   }
 
+  // Calculate the total cost
+  const totalCost = cost * quantity;
+
+  // Apply quantity-based discounts for black & white and color prints
+ 
   // Calculate the discounted cost
-  const discountedCost = totalCost - (totalCost * discount);
+  const discountedCost = dscount;
 
   // Display the total cost with discount
   const resultElement = document.getElementById("result");
