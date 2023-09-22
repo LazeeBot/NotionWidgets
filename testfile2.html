@@ -251,39 +251,39 @@ const totalCost = cost * quantity;
 // Calculate the discounted cost
 const discountedCost = totalCost - (totalCost * discount);
 
-// Display the total cost with discount
-const resultElement = document.getElementById("result");
-resultElement.innerHTML = `Total Cost: $${discountedCost.toFixed(2)}`;
+ // Display the total cost with discount
+  const resultElement = document.getElementById("result");
+  resultElement.innerHTML = `Total Cost: $${discountedCost.toFixed(2)}`;
 
-// Add the calculation result to the table
-const table = document.getElementById("costTable");
-const tbody = table.querySelector("tbody");
-const newRow = tbody.insertRow();
-const cell1 = newRow.insertCell(0);
-const cell2 = newRow.insertCell(1);
-const cell3 = newRow.insertCell(2);
-const cell4 = newRow.insertCell(3);
-const cell5 = newRow.insertCell(4);
-const cell6 = newRow.insertCell(5);
-const cell7 = newRow.insertCell(6);
-const cell8 = newRow.insertCell(7);
+  // Add the calculation result to the table
+  const table = document.getElementById("costTable");
+  const tbody = table.querySelector("tbody");
+  const newRow = tbody.insertRow();
+  const cell1 = newRow.insertCell(0);
+  const cell2 = newRow.insertCell(1);
+  const cell3 = newRow.insertCell(2);
+  const cell4 = newRow.insertCell(3);
+  const cell5 = newRow.insertCell(4);
+  const cell6 = newRow.insertCell(5);
+  const cell7 = newRow.insertCell(6);
+  const cell8 = newRow.insertCell(7);
 
-cell1.textContent = size;
-cell2.textContent = printType === "single" ? "Single Side" : "Double Side";
-cell3.textContent = paperType === "regular" ? "Regular Paper" : "Premium Paper";
-cell4.textContent = inkType === "bw" ? "Black & White" : "Color";
-cell5.textContent = quantity;
-cell6.textContent = `$${cost.toFixed(2)}`;
-cell7.innerHTML = `$${totalCost.toFixed(2)} (Discounted: <span style="color: red; font-weight: bold;">$${discountedCost.toFixed(2)}</span>)`;
+  cell1.textContent = size;
+  cell2.textContent = printType === "single" ? "Single Side" : "Double Side";
+  cell3.textContent = paperType === "regular" ? "Regular Paper" : "Premium Paper";
+  cell4.textContent = inkType === "bw" ? "Black & White" : "Color";
+  cell5.textContent = quantity;
+  cell6.textContent = `$${cost.toFixed(2)}`;
+  cell7.innerHTML = `<span style="color: red; font-weight: bold;">$${discountedCost.toFixed(2)}</span>`;
+  cell8.textContent = `$${(cost * quantity).toFixed(2)}`;
 
-// Add delete button to the row
-const deleteButton = document.createElement("button");
-deleteButton.textContent = "Delete";
-deleteButton.onclick = function () {
-  const rowIndex = newRow.rowIndex;
-  table.deleteRow(rowIndex);
-};
-cell8.appendChild(deleteButton);
+  // Add delete button to the row
+  const deleteButton = document.createElement("button");
+  deleteButton.textContent = "Delete";
+  deleteButton.onclick = function () {
+    tbody.deleteRow(newRow.rowIndex);
+  };
+  cell8.appendChild(deleteButton);
 
     }
 }
