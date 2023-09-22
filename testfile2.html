@@ -120,7 +120,7 @@
     </table>
   </div>
 <script>
-   function calculateCost() {
+  function calculateCost() {
   const quantity = parseFloat(document.getElementById("quantity").value);
   const size = document.getElementById("size").value;
   const printType = document.getElementById("printType").value;
@@ -182,19 +182,24 @@
       cost = size === "8.5x11" ? letterCost : size === "8.5x14" ? legalCost : tabloidCost;
     }
   }
-      let discount = 0;
+
+  // Calculate the total cost
+  const totalCost = cost * quantity;
+
+  // Apply quantity-based discounts for black & white and color prints
+  let discount = 0;
 
   if (inkType === "bw") {
     if (quantity >= 500 && quantity < 1000) {
-      discount = size === "8.5x11" && printType === "single" ? cost - 0.01 : size === "8.5x11" && printType === "double" ? cost - 0.02 : 0;
+      discount = size === "8.5x11" && printType === "single" ? 0.01 : size === "8.5x11" && printType === "double" ? 0.02 : 0;
     } else if (quantity >= 1000 && quantity < 5000) {
-      discount = size === "8.5x11" && printType === "single" ? cost - 0.02 : size === "8.5x11" && printType === "double" ? cost - 0.03 : 0;
+      discount = size === "8.5x11" && printType === "single" ? 0.02 : size === "8.5x11" && printType === "double" ? 0.03 : 0;
     } else if (quantity >= 5000 && quantity < 10000) {
-      discount = size === "8.5x11" && printType === "single" ? cost - 0.03 : size === "8.5x11" && printType === "double" ? cost - 0.04 : 0;
+      discount = size === "8.5x11" && printType === "single" ? 0.03 : size === "8.5x11" && printType === "double" ? 0.04 : 0;
     } else if (quantity >= 10000 && quantity < 20000) {
-      discount = size === "8.5x11" && printType === "single" ? cost - 0.04 : size === "8.5x11" && printType === "double" ? cost - 0.05 : 0;
+      discount = size === "8.5x11" && printType === "single" ? 0.04 : size === "8.5x11" && printType === "double" ? 0.05 : 0;
     } else if (quantity >= 20000) {
-      discount = size === "8.5x11" && printType === "single" ? cost - 0.05 : size === "8.5x11" && printType === "double" ? cost - 0.07 : 0;
+      discount = size === "8.5x11" && printType === "single" ? 0.05 : size === "8.5x11" && printType === "double" ? 0.07 : 0;
     }
   } else if (inkType === "color") {
     if (quantity >= 50 && quantity < 100) {
@@ -210,13 +215,8 @@
     }
   }
 
-  // Calculate the total cost
-  const totalCost = cost * quantity;
-
-  // Apply quantity-based discounts for black & white and color prints
- 
   // Calculate the discounted cost
-  const discountedCost = dscount;
+  const discountedCost = totalCost - (totalCost * discount);
 
   // Display the total cost with discount
   const resultElement = document.getElementById("result");
