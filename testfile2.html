@@ -259,7 +259,7 @@
 
      // Display the total cost and discounted cost
       const resultElement = document.getElementById("result");
-      resultElement.textContent = `Total Cost: $${totalCost.toFixed(2)} (Discounted: $${discountedCost.toFixed(2)})`;
+      resultElement.textContent = `Total Cost: $${totalCost.toFixed(2)}; // (Discounted: $${discountedCost.toFixed(2)})`;
      
   // Display the total cost with discount
   //const resultElement = document.getElementById("result");
@@ -284,7 +284,7 @@
   cell4.textContent = inkType === "bw" ? "Black & White" : "Color";
   cell5.textContent = quantity;
   cell6.textContent = `$${cost.toFixed(2)}`;
-  cell7.textContent = `$${totalCost.toFixed(2)} (Discounted: $${discountedCost.toFixed(2)})`;
+  cell7.textContent = `$${totalCost.toFixed(2)} \\ (Discounted: $${discountedCost.toFixed(2)})`;
   // cell7.textContent = `$${totalCost.toFixed(2)} (${discountText})`;
 
   // Add delete button to the row
