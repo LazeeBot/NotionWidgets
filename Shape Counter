@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shape Counter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+        form div {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 8px;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        button {
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.25em;
+            font-weight: bold;
+            color: black;
+        }
+        .grid {
+            display: grid;
+            gap: 2px;
+            background-color: #ddd;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+        .shape {
+            background-color: #007bff;
+            width: 100%;
+            height: 100%;
+        }
+        .preview-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            gap: 10px;
+        }
+        .highlight {
+            background-color: #ffeeba;
+        }
+        .preview {
+            flex: 1;
+            max-width: 45%;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Shape Counter Application</h1>
+    <form id="shapeCounterForm">
+        <div>
+            <label for="shapeWidth">Shape Width (in inches):</label>
+            <input type="number" id="shapeWidth" step="0.1" required>
+        </div>
+        <div>
+            <label for="shapeHeight">Shape Height (in inches):</label>
+            <input type="number" id="shapeHeight" step="0.1" required>
+        </div>
+        <div>
+            <label for="space">Select Space:</label>
+            <select id="space" required>
+                <option value="8,10.5">Letter (8" x 10.5")</option>
+                <option value="8,13.5">Legal (8" x 13.5")</option>
+                <option value="10.5,16.5">Tabloid (10.5" x 16.5")</option>
+                <option value="custom">Custom</option>
+            </select>
+        </div>
+        <div id="customSpaceInputs" style="display: none;">
+            <label for="spaceWidth">Space Width (in inches):</label>
+            <input type="number" id="spaceWidth" step="0.1">
+
+            <label for="spaceHeight">Space Height (in inches):</label>
+            <input type="number" id="spaceHeight" step="0.1">
+        </div>
+        <button type="button" id="computeButton">Compute</button>
+    </form>
+
+    <div class="result">
+        <h2>Results:</h2>
+        <p id="resultText"></p>
+        <div class="preview-container">
+            <div class="preview">
+                <h3>Portrait:</h3>
+                <div id="portraitGrid" class="grid"></div>
+            </div>
+            <div class="preview">
+                <h3>Landscape:</h3>
+                <div id="landscapeGrid" class="grid"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const spaceSelect = document.getElementById('space');
+    const customSpaceInputs = document.getElementById('customSpaceInputs');
+    const computeButton = document.getElementById('computeButton');
+    const resultText = document.getElementById('resultText');
+    const portraitGrid = document.getElementById('portraitGrid');
+    const landscapeGrid = document.getElementById('landscapeGrid');
+
+    spaceSelect.addEventListener('change', () => {
+        if (spaceSelect.value === 'custom') {
+            customSpaceInputs.style.display = 'block';
+        } else {
+            customSpaceInputs.style.display = 'none';
+        }
+    });
+
+    computeButton.addEventListener('click', () => {
+        const shapeWidth = parseFloat(document.getElementById('shapeWidth').value);
+        const shapeHeight = parseFloat(document.getElementById('shapeHeight').value);
+
+        if (!shapeWidth || !shapeHeight) {
+            alert('Please enter valid shape dimensions.');
+            return;
+        }
+
+        let spaceWidth, spaceHeight;
+
+        if (spaceSelect.value === 'custom') {
+            spaceWidth = parseFloat(document.getElementById('spaceWidth').value);
+            spaceHeight = parseFloat(document.getElementById('spaceHeight').value);
+
+            if (!spaceWidth || !spaceHeight) {
+                alert('Please enter valid space dimensions.');
+                return;
+            }
+        } else {
+            [spaceWidth, spaceHeight] = spaceSelect.value.split(',').map(Number);
+        }
+
+        // Dynamically adjust the previews to fit container size
+        const containerWidth = document.querySelector('.preview-container').offsetWidth;
+        const maxPreviewWidth = containerWidth * 0.45;
+
+        let scalePortrait = maxPreviewWidth / spaceWidth;
+        let scaleLandscape = maxPreviewWidth / spaceHeight;
+
+        const portraitPreviewWidth = spaceWidth * scalePortrait;
+        const portraitPreviewHeight = spaceHeight * scalePortrait;
+
+        const landscapePreviewWidth = spaceHeight * scaleLandscape;
+        const landscapePreviewHeight = spaceWidth * scaleLandscape;
+
+        // Portrait computation
+        const shapesPerRowPortrait = Math.floor(spaceWidth / shapeWidth);
+        const shapesPerColumnPortrait = Math.floor(spaceHeight / shapeHeight);
+        const totalShapesPortrait = shapesPerRowPortrait * shapesPerColumnPortrait;
+
+        // Landscape computation
+        const shapesPerRowLandscape = Math.floor(spaceHeight / shapeWidth);
+        const shapesPerColumnLandscape = Math.floor(spaceWidth / shapeHeight);
+        const totalShapesLandscape = shapesPerRowLandscape * shapesPerColumnLandscape;
+
+        resultText.innerHTML = `Portrait: ${totalShapesPortrait} shape(s), Landscape: ${totalShapesLandscape} shape(s).`;
+
+        if (totalShapesPortrait > totalShapesLandscape) {
+            resultText.innerHTML = `<span class="highlight">Portrait: ${totalShapesPortrait} shape(s)</span>, Landscape: ${totalShapesLandscape} shape(s).`;
+        } else if (totalShapesLandscape > totalShapesPortrait) {
+            resultText.innerHTML = `Portrait: ${totalShapesPortrait} shape(s), <span class="highlight">Landscape: ${totalShapesLandscape} shape(s)</span>.`;
+        }
+
+        // Render portrait preview
+        portraitGrid.innerHTML = '';
+        portraitGrid.style.gridTemplateColumns = `repeat(${shapesPerRowPortrait}, 1fr)`;
+        portraitGrid.style.gridTemplateRows = `repeat(${shapesPerColumnPortrait}, ${100 / shapesPerColumnPortrait}%)`;
+        portraitGrid.style.width = `${portraitPreviewWidth}px`;
+        portraitGrid.style.height = `${portraitPreviewHeight}px`;
+
+        for (let i = 0; i < totalShapesPortrait; i++) {
+            const shapeDiv = document.createElement('div');
+            shapeDiv.className = 'shape';
+            portraitGrid.appendChild(shapeDiv);
+        }
+
+        // Render landscape preview
+        landscapeGrid.innerHTML = '';
+        landscapeGrid.style.gridTemplateColumns = `repeat(${shapesPerRowLandscape}, 1fr)`;
+        landscapeGrid.style.gridTemplateRows = `repeat(${shapesPerColumnLandscape}, ${100 / shapesPerColumnLandscape}%)`;
+        landscapeGrid.style.width = `${landscapePreviewWidth}px`;
+        landscapeGrid.style.height = `${landscapePreviewHeight}px`;
+
+        for (let i = 0; i < totalShapesLandscape; i++) {
+            const shapeDiv = document.createElement('div');
+            shapeDiv.className = 'shape';
+            landscapeGrid.appendChild(shapeDiv);
+        }
+    });
+</script>
+</body>
+</html>
